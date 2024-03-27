@@ -3,6 +3,7 @@ public/*
 
 _build
 _opam
+db.sqlite
 
 node_modules
 package-lock.json

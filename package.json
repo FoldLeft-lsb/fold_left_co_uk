@@ -4,8 +4,11 @@
   "description": "A website to show off my WebAssembly games",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack --mode production --entry ./_build/default/src/output/src/Entry.js -o ./public",
-    "dev": "webpack serve --mode development --port 4321 --entry ./_build/default/src/output/src/Entry.js"
+    "webpack-build": "webpack --mode production --entry ./_build/default/src/output/src/Entry.js -o ./public",
+    "dev": "webpack serve --mode development --port 4321 --entry ./_build/default/src/output/src/Entry.js",
+    "sass-build": "sass src/scss/main.scss public/main.css",
+    "sass-watch": "sass src/scss/main.scss public/main.css -w",
+    "bundle": "npm run sass-build && npm run webpack-build"
   },
   "author": "",
   "license": "MIT",
@@ -14,6 +17,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "sass": "^1.72.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"

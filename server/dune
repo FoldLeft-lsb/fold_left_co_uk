@@ -1,3 +1,5 @@
 (executable
  (name server)
- (libraries dream tyxml))
+ (libraries dream tyxml caqti-driver-sqlite3)
+ (preprocess
+  (pps lwt_ppx)))
