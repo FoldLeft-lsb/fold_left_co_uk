@@ -1,0 +1,8 @@
+(melange.emit
+ (target output)
+ (alias react)
+ (libraries reason-react melange.belt)
+ (modules :standard)
+ (preprocess
+  (pps melange.ppx reason-react-ppx))
+ (module_systems es6))

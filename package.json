@@ -1,0 +1,21 @@
+{
+  "name": "lb_portfolio",
+  "version": "1.0.0",
+  "description": "A website to show off my WebAssembly games",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "webpack --mode production --entry ./_build/default/src/output/src/Entry.js -o ./public",
+    "dev": "webpack serve --mode development --port 4321 --entry ./_build/default/src/output/src/Entry.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}

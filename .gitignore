@@ -1,0 +1,8 @@
+public/*
+!public/index.html
+
+_build
+_opam
+
+node_modules
+package-lock.json
