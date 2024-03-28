@@ -1,13 +1,33 @@
-let _thing: Common.Types.greeting_t = {greeting: "Hello from Client"};
+// Lol
+let get_gameid_search = (search: string) =>
+  if (Js.Re.test(~str=search, Js.Re.fromString("id=([0-9])+"))) {
+    switch (
+      int_of_string(
+        Js.String.split(
+          ~sep="id=",
+          Js.String.split(~sep="&", ~limit=1, search)[0],
+        )[1],
+      )
+    ) {
+    | exception _exn => None
+    | id => Some(id)
+    };
+  } else {
+    None;
+  };
 
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
   let currentView =
-    switch (url.path) {
-    | [] => Nav.Home
-    | ["games"] => GamesList
-    | ["game"] => Game
+    switch (url.path, url.search) {
+    | ([], "") => Nav.Home
+    | (["games"], "") => GamesList
+    | (["games"], search) =>
+      switch (get_gameid_search(search)) {
+      | Some(id) => Game(id)
+      | None => NotFound
+      }
     | _ => NotFound
     };
   <div className="GameGoblin-ui">
@@ -15,19 +35,8 @@ let make = () => {
     {switch (currentView) {
      | Nav.Home =>
        <div className="home"> <p> {React.string("Home View")} </p> </div>
-     | GamesList =>
-       <div className="games-list">
-         <p> {React.string("GamesList View")} </p>
-       </div>
-     | Game =>
-       <div className="game">
-         <IFrame
-           src="/wasm/cgol.html"
-           title="Game of Life"
-           width="752px"
-           height="900px"
-         />
-       </div>
+     | GamesList => <GamesList />
+     | Game(id) => <ShowGame id />
      | NotFound => <NotFound />
      }}
   </div>;

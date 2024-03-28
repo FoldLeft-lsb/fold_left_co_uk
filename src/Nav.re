@@ -1,14 +1,14 @@
 type view_t =
   | Home
   | GamesList
-  | Game
+  | Game(int)
   | NotFound;
 
 let getViewLabel = view =>
   switch (view) {
   | Home => "Home"
   | GamesList => "GamesList"
-  | Game => "Game"
+  | Game(_id) => "Game"
   | NotFound => ""
   };
 
@@ -16,7 +16,7 @@ let getViewHref = view =>
   switch (view) {
   | Home => "/"
   | GamesList => "/games"
-  | Game => "/game"
+  | Game(id) => "/games?id=" ++ string_of_int(id)
   | NotFound => ""
   };
 
@@ -24,7 +24,7 @@ let getViewHref = view =>
 let make = (~currentView) => {
   <div className="nav">
     <ul>
-      {[Home, GamesList, Game]
+      {[Home, GamesList]
        ->Belt.List.map(view =>
            <li
              className={"nav-item " ++ (view == currentView ? "selected" : "")}>

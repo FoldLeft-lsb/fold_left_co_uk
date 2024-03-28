@@ -1,9 +1,7 @@
-type greeting_t = {greeting: string};
-
 module Wasm_App = {
   type t = {
     id: int,
-    [@mel.key "type"]
+    [@mel.key "type"] // this probably won't work for server
     type_: string,
     name: string,
     homepage: string,

@@ -1,20 +1,3 @@
-.GameGoblin-ui {
-  .nav {
-    background-color: bisque;
-
-    ul {
-      list-style-type: none;
-      display: flex;
-      justify-content: start;
-
-      li {
-        margin-right: 1rem;
-      }
-    }
-  }
-
-  .home,
-  .games-list {
-    background-color: beige;
-  }
-}
+@import "vars";
+@import "nav";
+@import "page";

@@ -1,22 +1,28 @@
-let _thing: Common.Types.greeting_t = {greeting: "Hello from Server"};
-
 let default_route = Dream.from_filesystem("public", "index.html");
 
+let api_routes = [
+  Dream.get("/games", request => {
+    let%lwt db_apps = Dream.sql(request, Wasm_App.Table.list);
+    db_apps |> Wasm_App.Json.encode_list |> Dream.json;
+  }),
+  Dream.get("/games/:id", request => {
+    switch (int_of_string(Dream.param(request, "id"))) {
+    | exception _exn => request |> Dream.not_found
+    | id =>
+      let%lwt db_app = Dream.sql(request, Wasm_App.Table.item(id));
+      switch (db_app) {
+      | Some(db_app) => db_app |> Wasm_App.Json.encode |> Dream.json
+      | None => request |> Dream.not_found
+      };
+    }
+  }),
+];
+
 let routes = [
-  Dream.scope(
-    "/api",
-    [],
-    [
-      Dream.get("/games", request => {
-        let%lwt db_apps = Dream.sql(request, Wasm_App.Table.list);
-        db_apps |> Wasm_App.Json.encode_list |> Dream.json;
-      }),
-    ],
-  ),
-  Dream.get("/", default_route),
+  Dream.scope("/api", [], api_routes),
+  Dream.get("/static/**", Dream.static("public")),
   Dream.get("/games", default_route),
-  Dream.get("/game", default_route),
-  Dream.get("/**", Dream.static("public")),
+  Dream.get("/", default_route),
 ];
 
 let () =

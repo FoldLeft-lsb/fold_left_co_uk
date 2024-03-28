@@ -1,9 +1,8 @@
 module type DB = Caqti_lwt.CONNECTION;
 
 // Replace this with Yojson or something
-// Maybe place in Common and use it front and back end
 module Json = {
-  let encode = (t: Common.Types.Wasm_App.t) => {
+  let encode_item = (t: Common.Types.Wasm_App.t) => {
     "{"
     ++ "\"id\": "
     ++ string_of_int(t.id)
@@ -29,13 +28,10 @@ module Json = {
     "["
     ++ (
       l
-      |> List.map(encode)
+      |> List.map(encode_item)
       |> List.fold_left((acc, v) => acc ++ (acc == "" ? "" : ", ") ++ v, "")
     )
     ++ "]";
-  };
-  let _decode = (_t: Common.Types.Wasm_App.t) => {
-    "";
   };
 };
 
@@ -45,14 +41,14 @@ module Table = {
 
   let wasm_app = {
     let encode =
-        ({id, name, type_, homepage, height, width}: Common.Types.Wasm_App.t) =>
+        ({id, type_, name, homepage, height, width}: Common.Types.Wasm_App.t) =>
       Ok((
         string_of_int(id),
-        (name, (type_, (homepage, (height, width)))),
+        (type_, (name, (homepage, (height, width)))),
       ));
-    let decode = ((id, (name, (type_, (homepage, (height, width)))))) =>
+    let decode = ((id, (type_, (name, (homepage, (height, width)))))) =>
       Ok(
-        {id: int_of_string(id), name, type_, homepage, height, width}: Common.Types.Wasm_App.t,
+        {id: int_of_string(id), type_, name, homepage, height, width}: Common.Types.Wasm_App.t,
       );
     let rep =
       Caqti_type.(
@@ -68,7 +64,7 @@ module Table = {
     let query =
       tup2(string, tup2(string, tup2(string, tup2(string, string))))
       ->. unit @@
-      "INSERT INTO wasm_apps (name, type, homepage, height, width) VALUES (?, ?, ?, ?, ?)";
+      "INSERT INTO wasm_apps (type, name, homepage, height, width) VALUES (?, ?, ?, ?, ?)";
     (text, module Db: DB) => {
       let%lwt unit_or_error = Db.exec(query, text);
       Caqti_lwt.or_fail(unit_or_error);
@@ -83,6 +79,14 @@ module Table = {
     (text, module Db: DB) => {
       let%lwt unit_or_error = Db.exec(query, text);
       Caqti_lwt.or_fail(unit_or_error);
+    };
+  };
+
+  let item = {
+    let query = int ->? wasm_app @@ "SELECT * FROM wasm_apps WHERE id == ?";
+    (id: int, module Db: DB) => {
+      let%lwt comments_or_error = Db.find_opt(query, id);
+      Caqti_lwt.or_fail(comments_or_error);
     };
   };
 
