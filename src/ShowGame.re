@@ -1,14 +1,14 @@
 [@react.component]
 let make = (~id: int) => {
-  let (game: Wasm_App.res_t(Common.Types.Wasm_App.t), setGames) =
+  let (game: Wasm_App.res_t(Common.Types.Wasm_App.t), setGame) =
     React.useState(() => Wasm_App.NotStarted);
   React.useEffect0(() => {
-    setGames(_ => Loading);
+    setGame(_ => Loading);
     Wasm_App.fetch_app_by_id(~id)
     |> Js.Promise.then_(result => {
          switch (result) {
-         | Error(msg) => setGames(_ => Failure(msg))
-         | Ok(games) => setGames(_ => Loaded(games))
+         | Error(msg) => setGame(_ => Failure(msg))
+         | Ok(games) => setGame(_ => Loaded(games))
          };
          Js.Promise.resolve();
        })

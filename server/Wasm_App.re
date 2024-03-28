@@ -85,16 +85,16 @@ module Table = {
   let item = {
     let query = int ->? wasm_app @@ "SELECT * FROM wasm_apps WHERE id == ?";
     (id: int, module Db: DB) => {
-      let%lwt comments_or_error = Db.find_opt(query, id);
-      Caqti_lwt.or_fail(comments_or_error);
+      let%lwt wasm_app_or_error = Db.find_opt(query, id);
+      Caqti_lwt.or_fail(wasm_app_or_error);
     };
   };
 
   let list = {
     let query = unit ->* wasm_app @@ "SELECT * FROM wasm_apps WHERE id < 10";
     (module Db: DB) => {
-      let%lwt comments_or_error = Db.collect_list(query, ());
-      Caqti_lwt.or_fail(comments_or_error);
+      let%lwt wasm_app_or_error = Db.collect_list(query, ());
+      Caqti_lwt.or_fail(wasm_app_or_error);
     };
   };
 };
