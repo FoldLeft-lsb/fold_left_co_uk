@@ -2,7 +2,7 @@
 
 (using melange 0.1)
 
-(name lb_portfolio)
+(name game_goblin)
 
 (license "MIT")
 
@@ -16,6 +16,6 @@
 
 (package
  (allow_empty)
- (name lb_portfolio)
- (synopsis "LB Portfolio")
+ (name game_goblin)
+ (synopsis "GameGoblin")
  (description "A website to show off my WebAssembly games"))

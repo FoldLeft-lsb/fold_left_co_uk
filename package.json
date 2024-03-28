@@ -1,5 +1,5 @@
 {
-  "name": "lb_portfolio",
+  "name": "game_goblin",
   "version": "1.0.0",
   "description": "A website to show off my WebAssembly games",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "sass-watch": "sass src/scss/main.scss public/main.css -w",
     "bundle": "npm run sass-build && npm run webpack-build"
   },
-  "author": "",
+  "author": "lboyle@protonmail.com",
   "license": "MIT",
   "dependencies": {
     "react": "^18.2.0",

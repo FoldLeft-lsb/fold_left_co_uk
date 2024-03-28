@@ -1,0 +1,1 @@
+rm db.sqlite && sqlite3 db.sqlite < db/db_schema.sql && sqlite3 db.sqlite < db/db_seed.sql 

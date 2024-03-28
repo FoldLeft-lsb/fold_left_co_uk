@@ -1,14 +1,4 @@
-// module type DB = Caqti_lwt.CONNECTION;
-// module T = Caqti_type;
-
-type greeting_t = {greeting: string};
-
-let greeting: greeting_t = {greeting: "Greetings from the API"};
-
-let elt_to_string = elt => Fmt.str("%a", Tyxml.Html.pp_elt(), elt);
-
-let someMarkup = Tyxml.Html.(a(~a=[a_href("/api")], [txt("api")]));
-let _markupText = elt_to_string(someMarkup);
+let _thing: Common.Types.greeting_t = {greeting: "Hello from Server"};
 
 let default_route = Dream.from_filesystem("public", "index.html");
 
@@ -17,9 +7,10 @@ let routes = [
     "/api",
     [],
     [
-      Dream.get("", _request =>
-        "{\"greeting\":\"" ++ greeting.greeting ++ "\"}" |> Dream.json
-      ),
+      Dream.get("/games", request => {
+        let%lwt db_apps = Dream.sql(request, Wasm_App.Table.list);
+        db_apps |> Wasm_App.Json.encode_list |> Dream.json;
+      }),
     ],
   ),
   Dream.get("/", default_route),
@@ -30,7 +21,7 @@ let routes = [
 
 let () =
   Dream.router(routes)
-  // |> Dream.sql_sessions
-  // |> Dream.sql_pool("sqlite3:db.sqlite")
+  |> Dream.sql_sessions
+  |> Dream.sql_pool("sqlite3:db.sqlite")
   |> Dream.logger
   |> Dream.run(~port=42069);

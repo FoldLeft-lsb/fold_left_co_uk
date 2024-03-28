@@ -1,3 +1,5 @@
+let _thing: Common.Types.greeting_t = {greeting: "Hello from Client"};
+
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
