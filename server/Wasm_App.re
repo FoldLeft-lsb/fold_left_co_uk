@@ -91,7 +91,7 @@ module Table = {
   };
 
   let list = {
-    let query = unit ->* wasm_app @@ "SELECT * FROM wasm_apps WHERE id < 10";
+    let query = unit ->* wasm_app @@ "SELECT * FROM wasm_apps";
     (module Db: DB) => {
       let%lwt wasm_app_or_error = Db.collect_list(query, ());
       Caqti_lwt.or_fail(wasm_app_or_error);

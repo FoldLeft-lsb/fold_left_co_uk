@@ -11,7 +11,7 @@ let api_routes = [
     | id =>
       let%lwt db_app = Dream.sql(request, Wasm_App.Table.item(id));
       switch (db_app) {
-      | Some(db_app) => db_app |> Wasm_App.Json.encode |> Dream.json
+      | Some(db_app) => db_app |> Wasm_App.Json.encode_item |> Dream.json
       | None => request |> Dream.not_found
       };
     }
