@@ -1,10 +1,10 @@
 [@react.component]
 let make = () => {
-  let (games: Demo_App.res_t(list(Common.Types.Demo_App.t)), setGames) =
-    React.useState(() => Demo_App.NotStarted);
+  let (games: DemoAppRest.res_t(list(Common.Types.Demo_App.t)), setGames) =
+    React.useState(() => DemoAppRest.NotStarted);
   React.useEffect0(() => {
     setGames(_ => Loading);
-    Demo_App.fetch_apps()
+    DemoAppRest.fetch_apps()
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setGames(_ => Failure(msg))

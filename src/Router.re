@@ -66,13 +66,15 @@ let make = () => {
         {switch (currentView) {
          | Nav.Home =>
            <Flex _as="div" display="flex" justify="center" className="home">
-             <CopyWriter source="Hello World!">
-               ...{copy =>
-                 <Text _as="p" size="9" weight="bold">
-                   {React.string(copy)}
-                 </Text>
-               }
-             </CopyWriter>
+             <Container size="2">
+               <CopyWriter source="Hello World!" pause=1000>
+                 ...{copy =>
+                   <Text _as="p" size="9" weight="bold">
+                     {React.string(copy)}
+                   </Text>
+                 }
+               </CopyWriter>
+             </Container>
            </Flex>
          | GamesList => <GamesList />
          | Game(id) => <ShowGame id />

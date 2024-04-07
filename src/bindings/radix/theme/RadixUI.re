@@ -68,7 +68,7 @@ module Flex = {
   external make:
     (
       ~_as: string=?,
-      ~asChild: string=?,
+      ~asChild: bool=?,
       ~display: string=?,
       ~direction: string=?,
       ~align: string=?,
@@ -83,4 +83,23 @@ module Flex = {
     ) =>
     React.element =
     "Flex";
+};
+
+module Container = {
+  [@mel.module "@radix-ui/themes"] [@react.component]
+  external make:
+    (
+      ~asChild: bool=?,
+      // Responsive<"1" | "2" | "3" | "4">
+      ~size: string=?,
+      // Responsive<"none" | "initial">
+      ~display: string=?,
+      // Responsive<"left" | "center" | "right">
+      ~align: string=?,
+      ~className: string=?,
+      ~children: React.element=?,
+      unit
+    ) =>
+    React.element =
+    "Container";
 };

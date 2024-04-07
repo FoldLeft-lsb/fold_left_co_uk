@@ -11,7 +11,15 @@ create table demo_apps(
   name text,
   homepage text,
   height text,
-  width text,
+  width text
+);
+
+create table projects(
+  id text not null primary key,
+  type text,
+  name text,
   description text,
-  controls text
+  controls text,
+  demo_id int,
+  foreign key (demo_id) references demo_apps(id)
 );

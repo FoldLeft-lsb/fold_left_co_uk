@@ -20,16 +20,41 @@ module Demo_App = {
     ++ "\","
     ++ "\"width\":\""
     ++ t.width
-    ++ "\","
-    ++ "\"description\":\""
-    ++ t.description
-    ++ "\","
-    ++ "\"controls\":\""
-    ++ t.controls
     ++ "\""
     ++ "}";
   };
   let encode_list = (l: list(Common.Types.Demo_App.t)) => {
+    "["
+    ++ (
+      l
+      |> List.map(encode_item)
+      |> List.fold_left((acc, v) => acc ++ (acc == "" ? "" : ", ") ++ v, "")
+    )
+    ++ "]";
+  };
+};
+
+module Project = {
+  let encode_item = (t: Common.Types.Project.t) => {
+    "{"
+    ++ "\"id\": "
+    ++ string_of_int(t.id)
+    ++ ","
+    ++ "\"type\":\""
+    ++ t.type_
+    ++ "\","
+    ++ "\"name\":\""
+    ++ t.name
+    ++ "\","
+    ++ "\"homepage\":\""
+    ++ t.description
+    ++ "\","
+    ++ "\"height\":\""
+    ++ t.controls
+    ++ "\""
+    ++ "}";
+  };
+  let encode_list = (l: list(Common.Types.Project.t)) => {
     "["
     ++ (
       l

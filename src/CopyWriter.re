@@ -6,16 +6,33 @@ type timer_t;
 
 [@react.component]
 let make =
-    (~source: string, ~interval: int=100, ~children: string => React.element) => {
-  let source_chars = Js.String.split(~sep="", ~limit=-1, source);
+    (
+      ~source: string,
+      ~interval: int=100,
+      ~pause: option(int)=?,
+      ~children: string => React.element,
+    ) => {
+  let buffer = Js.String.split(~sep="", ~limit=-1, source);
   let target = Js.String.length(source);
+
+  let (start, setStart) = React.useState(() => false);
+  React.useEffect0(() => {
+    switch (pause) {
+    | None =>
+      setStart(_ => true);
+      None;
+    | Some(pause_amount) =>
+      let timer = setTimeout(() => setStart(_ => true), pause_amount);
+      Some(() => clearTimeout(timer));
+    }
+  });
 
   let (counter, setCounter) = React.useState(() => 0);
   let (output, setOutput) = React.useState(() => "");
 
-  React.useEffect1(
+  React.useEffect2(
     () =>
-      if (counter >= target) {
+      if (!start || counter >= target) {
         None;
       } else {
         let adj_interval =
@@ -23,14 +40,14 @@ let make =
         let timer =
           setTimeout(
             () => {
-              setOutput(acc => acc ++ source_chars[counter]);
+              setOutput(acc => acc ++ buffer[counter]);
               setCounter(acc => acc + 1);
             },
             adj_interval,
           );
         Some(() => clearTimeout(timer));
       },
-    [|output|],
+    (output, start),
   );
   children(output);
 };

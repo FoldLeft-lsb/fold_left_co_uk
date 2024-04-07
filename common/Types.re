@@ -11,7 +11,17 @@ module Demo_App = {
     homepage: string,
     height: string,
     width: string,
+  };
+};
+
+module Project = {
+  type t = {
+    id: int,
+    [@mel.key "type"] // this probably won't work for server
+    type_: string,
+    name: string,
     description: string,
     controls: string,
+    demo_id: option(int),
   };
 };

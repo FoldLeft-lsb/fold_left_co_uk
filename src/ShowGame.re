@@ -1,10 +1,10 @@
 [@react.component]
 let make = (~id: int) => {
-  let (game: Demo_App.res_t(Common.Types.Demo_App.t), setGame) =
-    React.useState(() => Demo_App.NotStarted);
+  let (game: DemoAppRest.res_t(Common.Types.Demo_App.t), setGame) =
+    React.useState(() => DemoAppRest.NotStarted);
   React.useEffect0(() => {
     setGame(_ => Loading);
-    Demo_App.fetch_app_by_id(~id)
+    DemoAppRest.fetch_app_by_id(~id)
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setGame(_ => Failure(msg))
