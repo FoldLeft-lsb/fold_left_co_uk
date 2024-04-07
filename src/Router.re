@@ -22,8 +22,8 @@ let make = () => {
   let currentView =
     switch (url.path, url.search) {
     | ([], "") => Nav.Home
-    | (["games"], "") => GamesList
-    | (["games"], search) =>
+    | (["apps"], "") => GamesList
+    | (["apps"], search) =>
       switch (get_gameid_search(search)) {
       | Some(id) => Game(id)
       | None => NotFound

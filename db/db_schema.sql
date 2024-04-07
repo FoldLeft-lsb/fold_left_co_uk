@@ -5,11 +5,13 @@ create table dream_session (
   payload text not null
 );
 
-create table wasm_apps(
-  id text primary key,
+create table demo_apps(
+  id text not null primary key,
   type text,
   name text,
   homepage text,
   height text,
-  width text
+  width text,
+  description text,
+  controls text
 );

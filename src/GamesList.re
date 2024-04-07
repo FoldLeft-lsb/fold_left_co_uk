@@ -1,10 +1,10 @@
 [@react.component]
 let make = () => {
-  let (games: Wasm_App.res_t(list(Common.Types.Wasm_App.t)), setGames) =
-    React.useState(() => Wasm_App.NotStarted);
+  let (games: Demo_App.res_t(list(Common.Types.Demo_App.t)), setGames) =
+    React.useState(() => Demo_App.NotStarted);
   React.useEffect0(() => {
     setGames(_ => Loading);
-    Wasm_App.fetch_apps()
+    Demo_App.fetch_apps()
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setGames(_ => Failure(msg))
@@ -28,7 +28,7 @@ let make = () => {
        let rows =
          games
          ->Belt.List.map(game => {
-             let url = "/games?id=" ++ string_of_int(game.id);
+             let url = "/apps?id=" ++ string_of_int(game.id);
              <tr>
                <td colSpan=2> {React.string(game.name)} </td>
                <td>

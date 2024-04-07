@@ -1,10 +1,10 @@
 [@react.component]
 let make = (~id: int) => {
-  let (game: Wasm_App.res_t(Common.Types.Wasm_App.t), setGame) =
-    React.useState(() => Wasm_App.NotStarted);
+  let (game: Demo_App.res_t(Common.Types.Demo_App.t), setGame) =
+    React.useState(() => Demo_App.NotStarted);
   React.useEffect0(() => {
     setGame(_ => Loading);
-    Wasm_App.fetch_app_by_id(~id)
+    Demo_App.fetch_app_by_id(~id)
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setGame(_ => Failure(msg))
@@ -26,7 +26,7 @@ let make = (~id: int) => {
        </div>
      | Loaded(game) =>
        <IFrame
-         src={"/static/wasm/" ++ game.homepage}
+         src={"/static/" ++ game.homepage}
          title={game.name}
          width={game.width}
          height={game.height}
