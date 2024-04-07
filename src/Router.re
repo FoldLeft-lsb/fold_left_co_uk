@@ -1,3 +1,5 @@
+open RadixUI;
+
 // Lol
 let get_gameid_search = (search: string) =>
   if (Js.Re.test(~str=search, Js.Re.fromString("id=([0-9])+"))) {
@@ -16,6 +18,26 @@ let get_gameid_search = (search: string) =>
     None;
   };
 
+type theme_t =
+  | Light
+  | Dark
+  | Inherit;
+
+let get_theme_name = th =>
+  switch (th) {
+  | Light => "light"
+  | Dark => "dark"
+  | Inherit => "inherit"
+  };
+
+let get_theme = n =>
+  switch (n) {
+  | "light" => Light
+  | "dark" => Dark
+  | "inherit" => Inherit
+  | _ => Inherit
+  };
+
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
@@ -30,14 +52,32 @@ let make = () => {
       }
     | _ => NotFound
     };
-  <div className="GameGoblin-ui">
-    <Nav currentView />
-    {switch (currentView) {
-     | Nav.Home =>
-       <div className="home"> <p> {React.string("Home View")} </p> </div>
-     | GamesList => <GamesList />
-     | Game(id) => <ShowGame id />
-     | NotFound => <NotFound />
-     }}
-  </div>;
+  let (theme, _setTheme) = React.useState(() => Dark);
+
+  <Theme
+    appearance={get_theme_name(theme)}
+    accentColor="mint"
+    grayColor="gray"
+    panelBackground="solid"
+    radius="medium">
+    <div className="GameGoblin-ui">
+      // <Nav currentView />
+
+        {switch (currentView) {
+         | Nav.Home =>
+           <Flex _as="div" display="flex" justify="center" className="home">
+             <CopyWriter source="Hello World!">
+               ...{copy =>
+                 <Text _as="p" size="9" weight="bold">
+                   {React.string(copy)}
+                 </Text>
+               }
+             </CopyWriter>
+           </Flex>
+         | GamesList => <GamesList />
+         | Game(id) => <ShowGame id />
+         | NotFound => <NotFound />
+         }}
+      </div>
+  </Theme>;
 };

@@ -27,6 +27,6 @@ insert into demo_apps (id, type, name, homepage, height, width, description, con
   "three/blockgame_three/blockgame_three.html", 
   "768px",
   "1080px", 
-  "I made this one following a tutorial linked in the github repository, to get a feel for Three.js and play around with procedural generation. It's relatively easy to get up and running, comes with useful addons and examples, and leaves opportunities for improvements and optimization. A good refresher writing JS without React also.",
+  "I made this one following a tutorial to get a feel for Three.js and play around with procedural generation. It's relatively easy to get up and running, comes with useful addons and examples, and leaves opportunities for improvements and optimization. A good refresher writing JS without React also.",
   "First person controls with WASD and mouse, Left-click to interact, number keys to change selected block, F1 to save and F2 to load."
 );
