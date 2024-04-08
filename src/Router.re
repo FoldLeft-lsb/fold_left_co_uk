@@ -41,7 +41,7 @@ let get_theme = n =>
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
-  let currentView =
+  let _currentView =
     switch (url.path, url.search) {
     | ([], "") => Nav.Home
     | (["apps"], "") => GamesList
@@ -53,33 +53,14 @@ let make = () => {
     | _ => NotFound
     };
   let (theme, _setTheme) = React.useState(() => Dark);
-
-  <Theme
-    appearance={get_theme_name(theme)}
-    accentColor="mint"
-    grayColor="gray"
-    panelBackground="solid"
-    radius="medium">
-    <div className="GameGoblin-ui">
-      // <Nav currentView />
-
-        {switch (currentView) {
-         | Nav.Home =>
-           <Flex _as="div" display="flex" justify="center" className="home">
-             <Container size="2">
-               <CopyWriter source="Hello World!" pause=1000>
-                 ...{copy =>
-                   <Text _as="p" size="9" weight="bold">
-                     {React.string(copy)}
-                   </Text>
-                 }
-               </CopyWriter>
-             </Container>
-           </Flex>
-         | GamesList => <GamesList />
-         | Game(id) => <ShowGame id />
-         | NotFound => <NotFound />
-         }}
-      </div>
-  </Theme>;
+  <>
+    <Theme
+      appearance={get_theme_name(theme)}
+      accentColor="mint"
+      grayColor="gray"
+      panelBackground="solid"
+      radius="medium">
+      <div className="GameGoblin-ui"> <LandingPage /> </div>
+    </Theme>
+  </>;
 };

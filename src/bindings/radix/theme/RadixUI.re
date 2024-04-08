@@ -63,6 +63,32 @@ module Text = {
     "Text";
 };
 
+module Link = {
+  [@mel.module "@radix-ui/themes"] [@react.component]
+  external make:
+    (
+      ~href: string=?,
+      ~asChild: bool=?,
+      // Responsive<"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9">
+      ~size: string=?,
+      // Responsive<"light" | "regular" | "medium" | "bold">
+      ~weight: string=?,
+      // Responsive<"normal" | "start" | "end" | "both">
+      ~trim: string=?,
+      ~truncate: bool=?,
+      // Responsive<"wrap" | "nowrap" | "pretty" | "balance">
+      ~wrap: string=?,
+      // "auto" | "always" | "hover" | "none"
+      ~underline: string=?,
+      ~color: string=?,
+      ~highContrast: bool=?,
+      ~children: React.element=?,
+      unit
+    ) =>
+    React.element =
+    "Link";
+};
+
 module Flex = {
   [@mel.module "@radix-ui/themes"] [@react.component]
   external make:
@@ -97,6 +123,8 @@ module Container = {
       // Responsive<"left" | "center" | "right">
       ~align: string=?,
       ~className: string=?,
+      ~pt: string=?,
+      ~pb: string=?,
       ~children: React.element=?,
       unit
     ) =>

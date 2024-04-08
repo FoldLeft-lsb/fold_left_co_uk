@@ -2,7 +2,7 @@
 
 (using melange 0.1)
 
-(name game_goblin)
+(name fold_left_dev)
 
 (license "MIT")
 
@@ -10,12 +10,12 @@
 
 (authors lboyle@protonmail.com)
 
-(homepage https://github.com/LBoyle)
+(homepage https://github.com/FoldLeft-lsb)
 
-(bug_reports https://github.com/LBoyle)
+(bug_reports https://github.com/FoldLeft-lsb)
 
 (package
  (allow_empty)
- (name game_goblin)
- (synopsis "GameGoblin")
- (description "A website to show off my WebAssembly games"))
+ (name fold_left_dev)
+ (synopsis "FoldLeft.dev")
+ (description "A portfolio website to show off my WebAssembly games"))

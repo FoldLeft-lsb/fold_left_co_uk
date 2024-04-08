@@ -3,7 +3,7 @@
 module Demo_App = {
   let encode_item = (t: Common.Types.Demo_App.t) => {
     "{"
-    ++ "\"id\": "
+    ++ "\"id\":"
     ++ string_of_int(t.id)
     ++ ","
     ++ "\"type\":\""
@@ -37,7 +37,7 @@ module Demo_App = {
 module Project = {
   let encode_item = (t: Common.Types.Project.t) => {
     "{"
-    ++ "\"id\": "
+    ++ "\"id\":"
     ++ string_of_int(t.id)
     ++ ","
     ++ "\"type\":\""
@@ -46,12 +46,19 @@ module Project = {
     ++ "\"name\":\""
     ++ t.name
     ++ "\","
-    ++ "\"homepage\":\""
+    ++ "\"description\":\""
     ++ t.description
     ++ "\","
-    ++ "\"height\":\""
+    ++ "\"controls\":\""
     ++ t.controls
-    ++ "\""
+    ++ "\","
+    ++ "\"demo_id\":"
+    ++ (
+      switch (t.demo_id) {
+      | None => "null"
+      | Some(demo_id) => string_of_int(demo_id)
+      }
+    )
     ++ "}";
   };
   let encode_list = (l: list(Common.Types.Project.t)) => {

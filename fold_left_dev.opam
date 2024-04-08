@@ -1,11 +1,11 @@
 opam-version: "2.0"
-synopsis: "GameGoblin"
-description: "A website to show off my WebAssembly games"
+synopsis: "FoldLeft.dev"
+description: "A portfolio website to show off my WebAssembly games"
 maintainer: ["lboyle@protonmail.com"]
 authors: ["lboyle@protonmail.com"]
 license: "MIT"
-homepage: "https://github.com/LBoyle"
-bug-reports: "https://github.com/LBoyle"
+homepage: "https://github.com/FoldLeft-lsb"
+bug-reports: "https://github.com/FoldLeft-lsb"
 depends: [
   "ocaml"
   "reason" {>= "3.10.0"}
