@@ -2,7 +2,7 @@ open RadixUI.Themes;
 open Types;
 
 [@react.component]
-let make = (~id: int, ~theme: theme_t) => {
+let make = (~id: int, ~theme: theme_t, ~setTheme) => {
   let (game: DemoAppRest.res_t(Common.Types.Demo_App.t), setGame) =
     React.useState(() => DemoAppRest.NotStarted);
   React.useEffect0(() => {
@@ -18,13 +18,14 @@ let make = (~id: int, ~theme: theme_t) => {
     |> ignore;
     None;
   });
-  <div className="GameGoblin-ui">
-    <Theme
-      appearance={get_theme_name(theme)}
-      accentColor="mint"
-      grayColor="gray"
-      panelBackground="solid"
-      radius="medium">
+
+  <Theme
+    appearance={get_theme_name(theme)}
+    accentColor="mint"
+    grayColor="gray"
+    panelBackground="solid"
+    radius="medium">
+    <Flex _as="div" display="flex" justify="center" direction="column" pt="8">
       {switch (game) {
        | NotStarted
        | Loading => <p> {React.string("Loading")} </p>
@@ -34,13 +35,35 @@ let make = (~id: int, ~theme: theme_t) => {
            <p> {React.string(msg)} </p>
          </div>
        | Loaded(game) =>
-         <IFrame
-           src={"/static/" ++ game.homepage}
-           title={game.name}
-           width={game.width}
-           height={game.height}
-         />
+         <>
+           <IFrame
+             src={"/static/" ++ game.homepage}
+             title={game.name}
+             width={game.width}
+             height={game.height}
+           />
+           <br />
+           <Container size="2" p="4" pb="9">
+             <Text size="4" weight="bold">
+               {React.string(game.controls)}
+             </Text>
+           </Container>
+         </>
        }}
-    </Theme>
-  </div>;
+    </Flex>
+    <Switch
+      className="theme-button"
+      color="gray"
+      checked={theme == Dark}
+      highContrast=true
+      style={backgroundColor: "var(--gray-a2)", borderRadius: "var(--radius)"}
+      onCheckedChange={checked =>
+        if (checked) {
+          setTheme(_ => Dark);
+        } else {
+          setTheme(_ => Light);
+        }
+      }
+    />
+  </Theme>;
 };

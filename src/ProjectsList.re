@@ -22,7 +22,7 @@ let make = () => {
   });
   <Flex
     _as="div" display="flex" justify="center" direction="column" className="">
-    <Container size="4" p="4" pt="8">
+    <Container size="4" p="4" pt="8" pb="8">
       <Text _as="p" size="9" weight="bold"> {React.string("Projects")} </Text>
       <ScrollArea _type="always" scrollbars="horizontal">
         <Flex

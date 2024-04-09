@@ -10,6 +10,7 @@ module Demo_App = {
     homepage: string,
     height: string,
     width: string,
+    controls: string,
   };
 };
 
@@ -19,7 +20,6 @@ module Project = {
     _type: string,
     name: string,
     description: string,
-    controls: option(string),
     demo_id: option(int),
   };
 };

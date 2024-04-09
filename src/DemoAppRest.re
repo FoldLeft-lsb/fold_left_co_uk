@@ -13,6 +13,7 @@ module Decode = {
       homepage: json |> field("homepage", string),
       height: json |> field("height", string),
       width: json |> field("width", string),
+      controls: json |> field("controls", string),
     };
   };
   let list = (json: Js.Json.t): list(Common.Types.Demo_App.t) => {

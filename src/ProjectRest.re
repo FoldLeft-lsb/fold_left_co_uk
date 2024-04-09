@@ -11,7 +11,6 @@ module Decode = {
       _type: json |> field("type", string),
       name: json |> field("name", string),
       description: json |> field("description", string),
-      controls: json |> optional(field("controls", string)),
       demo_id: json |> optional(field("demo_id", int)),
     };
   };

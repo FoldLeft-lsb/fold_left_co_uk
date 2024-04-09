@@ -20,6 +20,9 @@ module Demo_App = {
     ++ "\","
     ++ "\"width\":\""
     ++ t.width
+    ++ "\","
+    ++ "\"controls\":\""
+    ++ t.controls
     ++ "\""
     ++ "}";
   };
@@ -49,14 +52,6 @@ module Project = {
     ++ "\"description\":\""
     ++ t.description
     ++ "\","
-    ++ "\"controls\":"
-    ++ (
-      switch (t.controls) {
-      | None => "null"
-      | Some(controls) => "\"" ++ controls ++ "\""
-      }
-    )
-    ++ ","
     ++ "\"demo_id\":"
     ++ (
       switch (t.demo_id) {

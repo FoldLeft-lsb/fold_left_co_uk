@@ -6,26 +6,17 @@ module Project = {
 
   let project = {
     let encode =
-        (
-          {id, _type, name, description, controls, demo_id}: Common.Types.Project.t,
-        ) =>
-      Ok((
-        string_of_int(id),
-        (_type, (name, (description, (controls, demo_id)))),
-      ));
-    let decode =
-        ((id, (_type, (name, (description, (controls, demo_id)))))) =>
+        ({id, _type, name, description, demo_id}: Common.Types.Project.t) =>
+      Ok((string_of_int(id), (_type, (name, (description, demo_id)))));
+    let decode = ((id, (_type, (name, (description, demo_id))))) =>
       Ok(
-        {id: int_of_string(id), _type, name, description, controls, demo_id}: Common.Types.Project.t,
+        {id: int_of_string(id), _type, name, description, demo_id}: Common.Types.Project.t,
       );
     let rep =
       Caqti_type.(
         tup2(
           string,
-          tup2(
-            string,
-            tup2(string, tup2(string, tup2(option(string), option(int)))),
-          ),
+          tup2(string, tup2(string, tup2(string, option(int)))),
         )
       );
     custom(~encode, ~decode, rep);
@@ -42,8 +33,8 @@ module Project = {
       )
       ->. unit @@
       "INSERT INTO projects "
-      ++ "(type, name, description, controls, demo_id)"
-      ++ " VALUES (?, ?, ?, ?, ?)";
+      ++ "(type, name, description, demo_id)"
+      ++ " VALUES (?, ?, ?, ?)";
     (text, module Db: DB) => {
       let%lwt unit_or_error = Db.exec(query, text);
       Caqti_lwt.or_fail(unit_or_error);
@@ -84,20 +75,34 @@ module Demo_App = {
 
   let demo_app = {
     let encode =
-        ({id, _type, name, homepage, height, width}: Common.Types.Demo_App.t) =>
+        (
+          {id, _type, name, homepage, height, width, controls}: Common.Types.Demo_App.t,
+        ) =>
       Ok((
         string_of_int(id),
-        (_type, (name, (homepage, (height, width)))),
+        (_type, (name, (homepage, (height, (width, controls))))),
       ));
-    let decode = ((id, (_type, (name, (homepage, (height, width)))))) =>
+    let decode =
+        ((id, (_type, (name, (homepage, (height, (width, controls))))))) =>
       Ok(
-        {id: int_of_string(id), _type, name, homepage, height, width}: Common.Types.Demo_App.t,
+        {
+          id: int_of_string(id),
+          _type,
+          name,
+          homepage,
+          height,
+          width,
+          controls,
+        }: Common.Types.Demo_App.t,
       );
     let rep =
       Caqti_type.(
         tup2(
           string,
-          tup2(string, tup2(string, tup2(string, tup2(string, string)))),
+          tup2(
+            string,
+            tup2(string, tup2(string, tup2(string, tup2(string, string)))),
+          ),
         )
       );
     custom(~encode, ~decode, rep);
@@ -108,8 +113,8 @@ module Demo_App = {
       tup2(string, tup2(string, tup2(string, tup2(string, string))))
       ->. unit @@
       "INSERT INTO demo_apps "
-      ++ "(type, name, homepage, height, width, description, controls)"
-      ++ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+      ++ "(type, name, homepage, height, width, controls)"
+      ++ " VALUES (?, ?, ?, ?, ?, ?)";
     (text, module Db: DB) => {
       let%lwt unit_or_error = Db.exec(query, text);
       Caqti_lwt.or_fail(unit_or_error);

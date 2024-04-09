@@ -35,7 +35,7 @@ let make = () => {
   let (theme, setTheme) = React.useState(() => Dark);
   switch (currentView) {
   | NotFound => <NotFound />
-  | Demo(id) => <ShowGame id theme />
+  | Demo(id) => <ShowGame id theme setTheme />
   | Landing =>
     <>
       <Theme
