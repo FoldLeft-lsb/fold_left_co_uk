@@ -8,7 +8,7 @@ module Decode = {
   let item = (json: Js.Json.t): Common.Types.Demo_App.t => {
     Json.Decode.{
       id: json |> field("id", int),
-      type_: json |> field("type", string),
+      _type: json |> field("type", string),
       name: json |> field("name", string),
       homepage: json |> field("homepage", string),
       height: json |> field("height", string),

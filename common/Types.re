@@ -5,8 +5,7 @@
 module Demo_App = {
   type t = {
     id: int,
-    [@mel.key "type"] // this probably won't work for server
-    type_: string,
+    _type: string,
     name: string,
     homepage: string,
     height: string,
@@ -17,11 +16,10 @@ module Demo_App = {
 module Project = {
   type t = {
     id: int,
-    [@mel.key "type"] // this probably won't work for server
-    type_: string,
+    _type: string,
     name: string,
     description: string,
-    controls: string,
+    controls: option(string),
     demo_id: option(int),
   };
 };

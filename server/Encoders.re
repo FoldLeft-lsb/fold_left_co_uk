@@ -7,7 +7,7 @@ module Demo_App = {
     ++ string_of_int(t.id)
     ++ ","
     ++ "\"type\":\""
-    ++ t.type_
+    ++ t._type
     ++ "\","
     ++ "\"name\":\""
     ++ t.name
@@ -41,7 +41,7 @@ module Project = {
     ++ string_of_int(t.id)
     ++ ","
     ++ "\"type\":\""
-    ++ t.type_
+    ++ t._type
     ++ "\","
     ++ "\"name\":\""
     ++ t.name
@@ -49,9 +49,14 @@ module Project = {
     ++ "\"description\":\""
     ++ t.description
     ++ "\","
-    ++ "\"controls\":\""
-    ++ t.controls
-    ++ "\","
+    ++ "\"controls\":"
+    ++ (
+      switch (t.controls) {
+      | None => "null"
+      | Some(controls) => "\"" ++ controls ++ "\""
+      }
+    )
+    ++ ","
     ++ "\"demo_id\":"
     ++ (
       switch (t.demo_id) {

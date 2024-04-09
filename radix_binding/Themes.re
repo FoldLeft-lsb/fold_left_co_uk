@@ -1,3 +1,8 @@
+type style_t = {
+  backgroundColor: string,
+  borderRadius: string,
+};
+
 module Theme = {
   [@mel.module "@radix-ui/themes"] [@react.component]
   external make:
@@ -82,6 +87,7 @@ module Link = {
       ~underline: string=?,
       ~color: string=?,
       ~highContrast: bool=?,
+      ~onClick: React.Event.Mouse.t => unit=?,
       ~children: React.element=?,
       unit
     ) =>
@@ -104,6 +110,9 @@ module Flex = {
       ~gapX: string=?,
       ~gapY: string=?,
       ~className: string=?,
+      ~p: string=?,
+      ~pt: string=?,
+      ~pb: string=?,
       ~children: React.element=?,
       unit
     ) =>
@@ -115,6 +124,7 @@ module Container = {
   [@mel.module "@radix-ui/themes"] [@react.component]
   external make:
     (
+      ~style: style_t=?,
       ~asChild: bool=?,
       // Responsive<"1" | "2" | "3" | "4">
       ~size: string=?,
@@ -123,6 +133,7 @@ module Container = {
       // Responsive<"left" | "center" | "right">
       ~align: string=?,
       ~className: string=?,
+      ~p: string=?,
       ~pt: string=?,
       ~pb: string=?,
       ~children: React.element=?,
@@ -130,4 +141,75 @@ module Container = {
     ) =>
     React.element =
     "Container";
+};
+
+module ScrollArea = {
+  [@mel.module "@radix-ui/themes"] [@react.component]
+  external make:
+    (
+      ~asChild: bool=?,
+      // Responsive<"1" | "2" | "3">
+      ~size: string=?,
+      // "none" | "small" | "medium" | "large" | "full"
+      ~radius: string=?,
+      // "vertical" | "horizontal" | "both"
+      ~scrollbars: string=?,
+      ~className: string=?,
+      ~_type: string=?,
+      ~pt: string=?,
+      ~pb: string=?,
+      ~children: React.element=?,
+      unit
+    ) =>
+    React.element =
+    "ScrollArea";
+};
+
+module Box = {
+  [@mel.module "@radix-ui/themes"] [@react.component]
+  external make:
+    (
+      ~_as: string=?, // "div" | "span"
+      ~asChild: bool=?,
+      ~style: style_t=?,
+      // Responsive<"none" | "inline" | "inline-block" | "block">
+      ~display: string=?,
+      ~className: string=?,
+      ~pt: string=?,
+      ~pb: string=?,
+      ~width: string=?,
+      ~height: string=?,
+      ~children: React.element=?,
+      unit
+    ) =>
+    React.element =
+    "Box";
+};
+
+module Switch = {
+  [@mel.module "@radix-ui/themes"] [@react.component]
+  external make:
+    (
+      ~asChild: bool=?,
+      ~defaultChecked: bool=?,
+      ~checked: bool=?,
+      ~disabled: bool=?,
+      ~required: bool=?,
+      ~name: string=?,
+      ~value: string=?,
+      ~onCheckedChange: bool => unit=?,
+      // Responsive<"1" | "2" | "3">
+      ~size: string=?,
+      // "classic" | "surface" | "soft"
+      ~variant: string=?,
+      // enum
+      ~color: string=?,
+      ~highContrast: bool=?,
+      ~radius: string=?,
+      ~style: style_t=?,
+      ~className: string=?,
+      unit
+    ) =>
+    React.element =
+    "Switch";
 };

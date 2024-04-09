@@ -8,10 +8,10 @@ module Decode = {
   let item = (json: Js.Json.t): Common.Types.Project.t => {
     Json.Decode.{
       id: json |> field("id", int),
-      type_: json |> field("type", string),
+      _type: json |> field("type", string),
       name: json |> field("name", string),
       description: json |> field("description", string),
-      controls: json |> field("controls", string),
+      controls: json |> optional(field("controls", string)),
       demo_id: json |> optional(field("demo_id", int)),
     };
   };

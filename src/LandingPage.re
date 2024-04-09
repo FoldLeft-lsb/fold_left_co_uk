@@ -1,4 +1,4 @@
-open RadixUI;
+open RadixUI.Themes;
 
 [@react.component]
 let make = () => {
@@ -7,8 +7,9 @@ let make = () => {
     display="flex"
     justify="center"
     direction="column"
-    className="home">
-    <Container size="2" pb="9">
+    className="home"
+    pt="9">
+    <Container size="2" pt="9" pb="9">
       <CopyWriter source="Hello World!" delay=600>
         ...{(hello_world, _) =>
           <Text _as="p" size="9" weight="bold">

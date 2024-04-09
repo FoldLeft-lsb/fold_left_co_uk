@@ -37,6 +37,7 @@ let api_routes = [
 let routes = [
   Dream.scope("/api", [], api_routes),
   Dream.get("/static/**", Dream.static("public")),
+  Dream.get("/projects", default_route),
   Dream.get("/apps", default_route),
   Dream.get("/", default_route),
 ];

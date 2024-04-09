@@ -3,7 +3,13 @@
 (melange.emit
  (target output)
  (alias react)
- (libraries reason-react melange.belt melange-json melange-fetch common)
+ (libraries
+  reason-react
+  melange.belt
+  melange-json
+  melange-fetch
+  common
+  radixUI)
  (modules :standard)
  (preprocess
   (pps melange.ppx reason-react-ppx))

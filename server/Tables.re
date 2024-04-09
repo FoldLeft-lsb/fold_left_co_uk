@@ -7,16 +7,16 @@ module Project = {
   let project = {
     let encode =
         (
-          {id, type_, name, description, controls, demo_id}: Common.Types.Project.t,
+          {id, _type, name, description, controls, demo_id}: Common.Types.Project.t,
         ) =>
       Ok((
         string_of_int(id),
-        (type_, (name, (description, (controls, demo_id)))),
+        (_type, (name, (description, (controls, demo_id)))),
       ));
     let decode =
-        ((id, (type_, (name, (description, (controls, demo_id)))))) =>
+        ((id, (_type, (name, (description, (controls, demo_id)))))) =>
       Ok(
-        {id: int_of_string(id), type_, name, description, controls, demo_id}: Common.Types.Project.t,
+        {id: int_of_string(id), _type, name, description, controls, demo_id}: Common.Types.Project.t,
       );
     let rep =
       Caqti_type.(
@@ -24,7 +24,7 @@ module Project = {
           string,
           tup2(
             string,
-            tup2(string, tup2(string, tup2(string, option(int)))),
+            tup2(string, tup2(string, tup2(option(string), option(int)))),
           ),
         )
       );
@@ -84,14 +84,14 @@ module Demo_App = {
 
   let demo_app = {
     let encode =
-        ({id, type_, name, homepage, height, width}: Common.Types.Demo_App.t) =>
+        ({id, _type, name, homepage, height, width}: Common.Types.Demo_App.t) =>
       Ok((
         string_of_int(id),
-        (type_, (name, (homepage, (height, width)))),
+        (_type, (name, (homepage, (height, width)))),
       ));
-    let decode = ((id, (type_, (name, (homepage, (height, width)))))) =>
+    let decode = ((id, (_type, (name, (homepage, (height, width)))))) =>
       Ok(
-        {id: int_of_string(id), type_, name, homepage, height, width}: Common.Types.Demo_App.t,
+        {id: int_of_string(id), _type, name, homepage, height, width}: Common.Types.Demo_App.t,
       );
     let rep =
       Caqti_type.(

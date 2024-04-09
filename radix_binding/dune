@@ -1,0 +1,7 @@
+(library
+ (name radixUI)
+ (libraries reason-react)
+ (modules :standard)
+ (preprocess
+  (pps melange.ppx reason-react-ppx))
+ (modes melange))
