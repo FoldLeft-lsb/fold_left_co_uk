@@ -23,7 +23,7 @@ let make = () => {
   <Flex
     _as="div" display="flex" justify="center" direction="column" className="">
     <Container size="4" p="4" pt="8" pb="8">
-      <Text _as="p" size="9" weight="bold"> {React.string("Projects")} </Text>
+      <Text _as="p" size="8" weight="bold"> {React.string("Projects")} </Text>
       <ScrollArea _type="always" scrollbars="horizontal">
         <Flex
           _as="div"
@@ -49,8 +49,8 @@ let make = () => {
                    backgroundColor: "var(--gray-a2)",
                    borderRadius: "var(--radius-3)",
                  }>
-                 <Box width="20rem" height="20rem">
-                   <Text _as="p" size="7" weight="bold">
+                 <Box maxWidth="20rem" height="20rem">
+                   <Text _as="p" size="6" weight="bold">
                      {React.string(project.name)}
                    </Text>
                    <Text _as="p" size="4" weight="bold">

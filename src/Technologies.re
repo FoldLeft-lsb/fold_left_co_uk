@@ -43,7 +43,7 @@ let make = () => {
   <Flex
     _as="div" display="flex" justify="center" direction="column" className="">
     <Container size="2" p="4" pt="8">
-      <Text _as="p" size="9" weight="bold">
+      <Text _as="p" size="8" weight="bold">
         {React.string("Technologies")}
       </Text>
       <Flex
@@ -55,8 +55,8 @@ let make = () => {
         className="">
         {techs
          ->Belt.List.map(((title, height, values)) => {
-             <Box width="40rem" height pt="8">
-               <Text _as="p" size="7" weight="bold">
+             <Box height pt="8">
+               <Text _as="p" size="6" weight="bold">
                  {React.string(title)}
                </Text>
                {values

@@ -177,6 +177,7 @@ module Box = {
       ~className: string=?,
       ~pt: string=?,
       ~pb: string=?,
+      ~maxWidth: string=?,
       ~width: string=?,
       ~height: string=?,
       ~children: React.element=?,
