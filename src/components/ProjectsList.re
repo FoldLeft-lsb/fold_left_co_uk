@@ -3,13 +3,13 @@ open RadixUI.Themes;
 [@react.component]
 let make = () => {
   let (
-    projects: ProjectRest.res_t(list(Common.Types.Project.t)),
+    projects: Api.ProjectRest.res_t(list(Common.Types.Project.t)),
     setProjects,
   ) =
-    React.useState(() => ProjectRest.NotStarted);
+    React.useState(() => Api.ProjectRest.NotStarted);
   React.useEffect0(() => {
     setProjects(_ => Loading);
-    ProjectRest.fetch_projects()
+    Api.ProjectRest.fetch_projects()
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setProjects(_ => Failure(msg))

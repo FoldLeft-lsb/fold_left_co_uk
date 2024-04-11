@@ -1,0 +1,14 @@
+(library
+ (name components)
+ (libraries
+  reason-react
+  melange.belt
+  melange-json
+  melange-fetch
+  common
+  radixUI
+  api)
+ (modules :standard)
+ (preprocess
+  (pps melange.ppx reason-react-ppx))
+ (modes melange))

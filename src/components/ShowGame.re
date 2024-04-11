@@ -1,13 +1,13 @@
 open RadixUI.Themes;
-open Types;
+open Util;
 
 [@react.component]
 let make = (~id: int, ~theme: theme_t, ~setTheme) => {
-  let (game: DemoAppRest.res_t(Common.Types.Demo_App.t), setGame) =
-    React.useState(() => DemoAppRest.NotStarted);
+  let (game: Api.DemoAppRest.res_t(Common.Types.Demo_App.t), setGame) =
+    React.useState(() => Api.DemoAppRest.NotStarted);
   React.useEffect0(() => {
     setGame(_ => Loading);
-    DemoAppRest.fetch_app_by_id(~id)
+    Api.DemoAppRest.fetch_app_by_id(~id)
     |> Js.Promise.then_(result => {
          switch (result) {
          | Error(msg) => setGame(_ => Failure(msg))

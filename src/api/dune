@@ -1,0 +1,7 @@
+(library
+ (name api)
+ (libraries melange.belt melange-json melange-fetch common)
+ (modules :standard)
+ (preprocess
+  (pps melange.ppx))
+ (modes melange))

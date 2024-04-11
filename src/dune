@@ -1,15 +1,9 @@
-(include_subdirs unqualified)
+; (include_subdirs unqualified)
 
 (melange.emit
  (target output)
  (alias react)
- (libraries
-  reason-react
-  melange.belt
-  melange-json
-  melange-fetch
-  common
-  radixUI)
+ (libraries reason-react components)
  (modules :standard)
  (preprocess
   (pps melange.ppx reason-react-ppx))

@@ -1,5 +1,5 @@
 open RadixUI.Themes;
-open Types;
+open Util;
 
 // Lol
 let get_gameid_search = (search: string) =>
@@ -57,7 +57,15 @@ let make = () => {
     };
   let (theme, setTheme) = React.useState(() => get_saved_theme());
   switch (currentView) {
-  | NotFound => <NotFound />
+  | NotFound =>
+    <Theme
+      appearance={get_theme_name(theme)}
+      accentColor="mint"
+      grayColor="gray"
+      panelBackground="solid"
+      radius="medium">
+      <NotFound />
+    </Theme>
   | Demo(id) => <ShowGame id theme setTheme />
   | Landing =>
     <>
