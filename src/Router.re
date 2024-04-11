@@ -19,6 +19,29 @@ let get_gameid_search = (search: string) =>
     None;
   };
 
+type storage_t;
+[@mel.val] external localStorage: storage_t = "localStorage";
+[@mel.send]
+external getItem: (storage_t, string) => Js.Nullable.t(string) = "getItem";
+[@mel.send]
+external setItem: (storage_t, string, Js.Nullable.t(string)) => unit =
+  "setItem";
+
+let local_storage_theme_key = "selected-theme-foldleft.co.uk";
+
+let get_saved_theme = () => {
+  (localStorage->getItem(local_storage_theme_key) |> Js.Nullable.toOption)
+  ->Belt.Option.map(theme => get_theme(theme))
+  ->Belt.Option.getWithDefault(Dark);
+};
+
+let set_saved_theme = (theme: theme_t) => {
+  localStorage->setItem(
+    local_storage_theme_key,
+    Js.Nullable.return(get_theme_name(theme)),
+  );
+};
+
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
@@ -32,7 +55,7 @@ let make = () => {
       }
     | _ => NotFound
     };
-  let (theme, setTheme) = React.useState(() => Dark);
+  let (theme, setTheme) = React.useState(() => get_saved_theme());
   switch (currentView) {
   | NotFound => <NotFound />
   | Demo(id) => <ShowGame id theme setTheme />
@@ -96,8 +119,10 @@ let make = () => {
           }
           onCheckedChange={checked =>
             if (checked) {
+              set_saved_theme(Dark);
               setTheme(_ => Dark);
             } else {
+              set_saved_theme(Light);
               setTheme(_ => Light);
             }
           }
