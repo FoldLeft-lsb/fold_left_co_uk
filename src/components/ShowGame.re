@@ -25,10 +25,11 @@ let make = (~id: int, ~theme: theme_t, ~setTheme) => {
     grayColor="gray"
     panelBackground="solid"
     radius="medium">
+    <BackButton />
     <Flex _as="div" display="flex" justify="center" direction="column" pt="8">
       {switch (game) {
        | NotStarted
-       | Loading => <p> {React.string("Loading")} </p>
+       | Loading => React.null
        | Failure(msg) =>
          <div>
            <p> {React.string("Error: ")} </p>
@@ -44,26 +45,17 @@ let make = (~id: int, ~theme: theme_t, ~setTheme) => {
            />
            <br />
            <Container size="2" p="4" pb="9">
-             <Text size="4" weight="bold">
-               {React.string(game.controls)}
-             </Text>
+             <CopyWriter source={game.controls} delay=300 interval=10>
+               ...{(copy, _) =>
+                 <Text _as="p" size="4" weight="bold">
+                   {React.string(copy)}
+                 </Text>
+               }
+             </CopyWriter>
            </Container>
          </>
        }}
     </Flex>
-    <Switch
-      className="theme-button"
-      color="gray"
-      checked={theme == Dark}
-      highContrast=true
-      style={backgroundColor: "var(--gray-a2)", borderRadius: "var(--radius)"}
-      onCheckedChange={checked =>
-        if (checked) {
-          setTheme(_ => Dark);
-        } else {
-          setTheme(_ => Light);
-        }
-      }
-    />
+    <DarkThemeSwitch theme setTheme />
   </Theme>;
 };

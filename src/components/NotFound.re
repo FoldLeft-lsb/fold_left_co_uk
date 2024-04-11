@@ -1,6 +1,10 @@
+open RadixUI.Themes;
+
 [@react.component]
 let make = () => {
-  <div className="page-not-found">
-    <p> {React.string("Page not found")} </p>
-  </div>;
+  <Container size="2" p="9">
+    <Text _as="p" size="8" weight="bold">
+      {React.string("Page not found")}
+    </Text>
+  </Container>;
 };

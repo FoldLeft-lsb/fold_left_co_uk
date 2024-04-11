@@ -19,29 +19,6 @@ let get_gameid_search = (search: string) =>
     None;
   };
 
-type storage_t;
-[@mel.val] external localStorage: storage_t = "localStorage";
-[@mel.send]
-external getItem: (storage_t, string) => Js.Nullable.t(string) = "getItem";
-[@mel.send]
-external setItem: (storage_t, string, Js.Nullable.t(string)) => unit =
-  "setItem";
-
-let local_storage_theme_key = "selected-theme-foldleft.co.uk";
-
-let get_saved_theme = () => {
-  (localStorage->getItem(local_storage_theme_key) |> Js.Nullable.toOption)
-  ->Belt.Option.map(theme => get_theme(theme))
-  ->Belt.Option.getWithDefault(Dark);
-};
-
-let set_saved_theme = (theme: theme_t) => {
-  localStorage->setItem(
-    local_storage_theme_key,
-    Js.Nullable.return(get_theme_name(theme)),
-  );
-};
-
 [@react.component]
 let make = () => {
   let url = ReasonReactRouter.useUrl();
@@ -65,6 +42,7 @@ let make = () => {
       panelBackground="solid"
       radius="medium">
       <NotFound />
+      <DarkThemeSwitch theme setTheme />
     </Theme>
   | Demo(id) => <ShowGame id theme setTheme />
   | Landing =>
@@ -86,10 +64,7 @@ let make = () => {
         <Box
           _as="div"
           className="GameGoblin-ui"
-          style={
-            backgroundColor: "var(--gray-a2)",
-            borderRadius: "var(--radius-3)",
-          }>
+          style={backgroundColor: "var(--gray-a2)"}>
           <ProjectsList />
         </Box>
       </Theme>
@@ -111,30 +86,12 @@ let make = () => {
               {React.string("Contact")}
             </Text>
             <br />
-            <Text _as="p" size="4">
+            <a href="mailto:lboyle@protonmail.com">
               {React.string("lboyle@protonmail.com")}
-            </Text>
+            </a>
           </Container>
         </Flex>
-        <Switch
-          className="theme-button"
-          color="gray"
-          checked={theme == Dark}
-          highContrast=true
-          style={
-            backgroundColor: "var(--gray-a2)",
-            borderRadius: "var(--radius)",
-          }
-          onCheckedChange={checked =>
-            if (checked) {
-              set_saved_theme(Dark);
-              setTheme(_ => Dark);
-            } else {
-              set_saved_theme(Light);
-              setTheme(_ => Light);
-            }
-          }
-        />
+        <DarkThemeSwitch theme setTheme />
       </Theme>
     </>
   };

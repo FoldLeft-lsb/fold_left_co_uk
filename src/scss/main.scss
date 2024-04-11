@@ -9,6 +9,15 @@ button.theme-button {
   margin-right: 10px;
 }
 
+a.back-button {
+  z-index: 1000 !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
 iframe.demo-frame {
   margin: auto;
 }

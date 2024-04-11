@@ -2,7 +2,7 @@
 
 (using melange 0.1)
 
-(name fold_left_dev)
+(name fold_left_co_uk)
 
 (license "MIT")
 
@@ -16,6 +16,6 @@
 
 (package
  (allow_empty)
- (name fold_left_dev)
- (synopsis "FoldLeft.dev")
+ (name fold_left_co_uk)
+ (synopsis "FoldLeft.co.uk")
  (description "A portfolio website to show off my WebAssembly games"))

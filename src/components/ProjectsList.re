@@ -34,21 +34,19 @@ let make = () => {
           className="">
           {switch (projects) {
            | NotStarted
-           | Loading => <p> {React.string("Loading")} </p>
+           | Loading => React.null
            | Failure(msg) =>
              <div>
                <p> {React.string("Error: ")} </p>
                <p> {React.string(msg)} </p>
              </div>
            | Loaded(projects) =>
-             Belt.List.map(projects, project => {
+             Belt.List.mapWithIndex(projects, (i, project) => {
                <Container
                  size="2"
-                 p="9"
-                 style={
-                   backgroundColor: "var(--gray-a2)",
-                   borderRadius: "var(--radius-3)",
-                 }>
+                 p="8"
+                 key={"project_" ++ string_of_int(i)}
+                 style={backgroundColor: "var(--gray-a2)"}>
                  <Box maxWidth="20rem" height="20rem">
                    <Text _as="p" size="6" weight="bold">
                      {React.string(project.name)}

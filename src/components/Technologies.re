@@ -6,8 +6,8 @@ let techs = [
     "14rem",
     [
       "ReasonML for JS",
-      "JavaScript",
-      "React",
+      "JavaScript/React",
+      "Linux sysadmin/Cloud",
       "Problem solving",
       "Learning new things",
     ],
@@ -19,7 +19,6 @@ let techs = [
       "ReasonML/OCaml native",
       "Relational Database",
       "DevOps/CI/CD",
-      "Linux sysadmin",
       "System Design",
       "TypeScript",
       "Python and Ruby",
@@ -31,7 +30,7 @@ let techs = [
     [
       "WebAssembly/WebGL",
       "C and C++",
-      "Shaders/GLSL",
+      "Shader/GLSL",
       "Rust? Elixir?",
       "Haskell?",
     ],
@@ -54,14 +53,21 @@ let make = () => {
         pt="9"
         className="">
         {techs
-         ->Belt.List.map(((title, height, values)) => {
-             <Box height pt="8">
+         ->Belt.List.mapWithIndex((i, (title, height, values)) => {
+             <Box height pt="8" key={title ++ "_" ++ string_of_int(i)}>
                <Text _as="p" size="6" weight="bold">
                  {React.string(title)}
                </Text>
                {values
-                ->Belt.List.map(v => {
-                    <Text _as="p" size="4"> {React.string(v)} </Text>
+                ->Belt.List.mapWithIndex((j, v) => {
+                    <Text
+                      _as="p"
+                      size="4"
+                      key={
+                        title ++ "_" ++ string_of_int(i) ++ string_of_int(j)
+                      }>
+                      {React.string(v)}
+                    </Text>
                   })
                 ->Belt.List.toArray
                 |> React.array}

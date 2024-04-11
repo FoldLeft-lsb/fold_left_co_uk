@@ -1,7 +1,4 @@
-type style_t = {
-  backgroundColor: string,
-  borderRadius: string,
-};
+type style_t = {backgroundColor: string};
 
 module Theme = {
   [@mel.module "@radix-ui/themes"] [@react.component]
@@ -61,6 +58,7 @@ module Text = {
       ~wrap: string=?,
       ~color: string=?,
       ~highContrast: bool=?,
+      ~className: string=?,
       ~children: React.element=?,
       unit
     ) =>
@@ -88,6 +86,7 @@ module Link = {
       ~color: string=?,
       ~highContrast: bool=?,
       ~onClick: React.Event.Mouse.t => unit=?,
+      ~className: string=?,
       ~children: React.element=?,
       unit
     ) =>
@@ -136,6 +135,7 @@ module Container = {
       ~p: string=?,
       ~pt: string=?,
       ~pb: string=?,
+      ~px: string=?,
       ~children: React.element=?,
       unit
     ) =>
