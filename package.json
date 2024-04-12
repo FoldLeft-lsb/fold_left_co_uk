@@ -1,8 +1,8 @@
 {
-  "name": "game_goblin",
+  "name": "foldleft_co_uk",
   "version": "1.0.0",
-  "description": "A website to show off my WebAssembly games",
-  "main": "index.js",
+  "description": "A website to show off my toy projects",
+  "main": "Entry.js",
   "scripts": {
     "webpack-build": "webpack --mode production --entry ./_build/default/src/output/src/Entry.js -o ./public",
     "dev": "webpack serve --mode development --port 4321 --entry ./_build/default/src/output/src/Entry.js",

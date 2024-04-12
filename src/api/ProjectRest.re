@@ -12,6 +12,8 @@ module Decode = {
       name: json |> field("name", string),
       description: json |> field("description", string),
       demo_id: json |> optional(field("demo_id", int)),
+      link: json |> optional(field("link", string)),
+      link_text: json |> optional(field("link_text", string)),
     };
   };
   let list = (json: Js.Json.t): list(Common.Types.Project.t) => {

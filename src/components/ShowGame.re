@@ -45,13 +45,9 @@ let make = (~id: int, ~theme: theme_t, ~setTheme) => {
            />
            <br />
            <Container size="2" p="4" pb="9">
-             <CopyWriter source={game.controls} delay=300 interval=10>
-               ...{(copy, _) =>
-                 <Text _as="p" size="4" weight="bold">
-                   {React.string(copy)}
-                 </Text>
-               }
-             </CopyWriter>
+             <Text _as="p" size="4" weight="bold">
+               {React.string(game.controls)}
+             </Text>
            </Container>
          </>
        }}

@@ -6,17 +6,45 @@ module Project = {
 
   let project = {
     let encode =
-        ({id, _type, name, description, demo_id}: Common.Types.Project.t) =>
-      Ok((string_of_int(id), (_type, (name, (description, demo_id)))));
-    let decode = ((id, (_type, (name, (description, demo_id))))) =>
+        (
+          {id, _type, name, description, demo_id, link, link_text}: Common.Types.Project.t,
+        ) =>
+      Ok((
+        string_of_int(id),
+        (_type, (name, (description, (demo_id, (link, link_text))))),
+      ));
+    let decode =
+        (
+          (
+            id,
+            (_type, (name, (description, (demo_id, (link, link_text))))),
+          ),
+        ) =>
       Ok(
-        {id: int_of_string(id), _type, name, description, demo_id}: Common.Types.Project.t,
+        {
+          id: int_of_string(id),
+          _type,
+          name,
+          description,
+          demo_id,
+          link,
+          link_text,
+        }: Common.Types.Project.t,
       );
     let rep =
       Caqti_type.(
         tup2(
           string,
-          tup2(string, tup2(string, tup2(string, option(int)))),
+          tup2(
+            string,
+            tup2(
+              string,
+              tup2(
+                string,
+                tup2(option(int), tup2(option(string), option(string))),
+              ),
+            ),
+          ),
         )
       );
     custom(~encode, ~decode, rep);
@@ -28,13 +56,22 @@ module Project = {
         string,
         tup2(
           string,
-          tup2(string, tup2(string, tup2(string, option(int)))),
+          tup2(
+            string,
+            tup2(
+              string,
+              tup2(
+                string,
+                tup2(option(int), tup2(option(string), option(string))),
+              ),
+            ),
+          ),
         ),
       )
       ->. unit @@
       "INSERT INTO projects "
-      ++ "(type, name, description, demo_id)"
-      ++ " VALUES (?, ?, ?, ?)";
+      ++ "(type, name, description, demo_id, link, link_text)"
+      ++ " VALUES (?, ?, ?, ?, ?, ?)";
     (text, module Db: DB) => {
       let%lwt unit_or_error = Db.exec(query, text);
       Caqti_lwt.or_fail(unit_or_error);

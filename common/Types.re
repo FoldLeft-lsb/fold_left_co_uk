@@ -17,5 +17,7 @@ module Project = {
     name: string,
     description: string,
     demo_id: option(int),
+    link: option(string),
+    link_text: option(string),
   };
 };

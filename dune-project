@@ -18,4 +18,4 @@
  (allow_empty)
  (name fold_left_co_uk)
  (synopsis "FoldLeft.co.uk")
- (description "A portfolio website to show off my WebAssembly games"))
+ (description "A website to show off my toy projects"))

@@ -1,5 +1,7 @@
-// Replace this with Yojson or something
-// I don't get type errors from it
+// Use something serious like Yojson for this
+// ultimately it's a more complicated way to do exactly
+// what I've done here, I think this is Ok for a toy project
+
 module Demo_App = {
   let encode_item = (t: Common.Types.Demo_App.t) => {
     "{"
@@ -57,6 +59,22 @@ module Project = {
       switch (t.demo_id) {
       | None => "null"
       | Some(demo_id) => string_of_int(demo_id)
+      }
+    )
+    ++ ","
+    ++ "\"link\":"
+    ++ (
+      switch (t.link) {
+      | None => "null"
+      | Some(link) => "\"" ++ link ++ "\""
+      }
+    )
+    ++ ","
+    ++ "\"link_text\":"
+    ++ (
+      switch (t.link_text) {
+      | None => "null"
+      | Some(link_text) => "\"" ++ link_text ++ "\""
       }
     )
     ++ "}";

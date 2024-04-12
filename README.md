@@ -1,45 +1,60 @@
-# GameGoblin server (working title, think Gringotts)
+# foldleft.co.uk 
 
-This project is meant to be a specialised website server for hosting WebAssembly games 
+Personal website for hosting the toy projects I've made that will run in a browser  
 
-#### Intended features 
-- Homepage 
-- Portfolio page 
-  - Probably tiles with name and description
-  - A generated page for each game 
-  - Customising the pages 
-  - Games are iframes so can be hosted local or remote, or loaded on other sites 
-- Admin interface 
-  - Login with 2fa and good security
-  - Add new games 
-- Server architecture 
-  - Modular database, sqlite for now but designed for Postgres 
-  - Sanitized inputs and login timeout  
-  - Controlled API routes generated from the db 
-  - Reverse proxy or some equivalent
-  - Maybe release as a docker image? 
-  - Multithreading with OCaml? 
+Honestly this site could be static html, it's quite bare and has a minimum of interactivity. The purpose of this project is to illustrate how I would make a proper webapp using my favourite tools. It is designed to scale up to quite a significant React application, it's one big main.js file now, OCaml's Dune build-system makes it trivially easy to split code into separate libraries down the line. 
 
-### Tech Choices 
 
-It's one codebase with one language, the regular OCaml compiler for the server and melange for the client 
+```
+common/
+  # Library for anything that can be shared by server and client 
+radix_binding/
+  # Library for FFI bindings to the @radix-ui/themes npm package
+server/ 
+  # API made in Reason(OCaml) with Dream and Caqti_lwt 
+src/ 
+  # Front-end source 
+  api/ # Server interactions
+  components/ 
+  scss/ # Didn't really make use of this beyond `@use`ing radix styles 
+db/ 
+  # SQL files for schema and seed data 
+public/ 
+  index.html # is included 
+  # Compiled front-end will go here 
+```
 
-#### Server 
-- Made with OCaml
-- For Linux 
-- Hopefully with interfaces for different DBs 
-- Generate API routes on the fly based on the DB 
-- Should be a systemd service with a user that owns it's working directory
 
-#### Client 
-- React, or rather ReasonReact 
-  - Maybe a bit excessive but I'm showing off with this project.. 
-- As much as possible should be in the DB so it's configurable
 
-#### The Games 
+### Server 
 
-The server should support drag & drop game files into the Admin interface to add new entries and the server will create a DB entry, folders in public directory, and generate new API routes to serve them
+I have used the Dream framework for my API written in the Reason dialect of OCaml, it's as easy to use as express was on Node, but something like 20x more performant and genuinely type-safe. 
 
-Because I'm using iframes to load the games up, they can be hosted remotely on some other server, so instead of drag & drop you can enter a URL, for this reason I guess you could point it to a webpage of any kind and it'll be loaded up as an iframe 
+Caqti_lwt is used to interface with the DB, the syntax is quite arcane, I don't like the nested tuples, but remember that in OCaml everything is an expression. The DB is just an sqlite3 file for now, it would be easy to substitute in Postgres or any other DB. 
 
-For that reason perhaps I should localhost only rather than allow users to point it at reddit or something 
+### Client 
+
+The client is also written in the Reason, it uses a different compiler called melange to produce javascript code. A simple React application using pre-made components, it's responsive, simple and concise, it contains only the information that matters. Less is more. 
+
+I've written some bindings to the Radix UI component library. Unless I'm mistaken, it's class-components with an inheritance hierarchy which is not recommended by the React team. Either way it's easy to use and looks great! 
+
+The accessibility is pretty good, it auto-translates fairly well I think, I'm a little concerned about text that draws one character at a time, screen-readers might struggle with that so I've kept the scrolling text to a minimum also. 
+
+I chose ReasonReact because I have real experience scaling a project like this up and supporting it in production. A few years into a project the type-system and compiler truly become a super-power. 
+
+### The Toy Projects 
+
+This site can host any kind of game that will run in a browser, in fact it's just an iframe so you could embed a youtube video or another website though I wouldn't recommend it. My projects will be hosted from the public/ directory with a main html file (not called index.html)
+
+```
+public/
+  wasm/
+    space_invaders/
+      space_invaders.html 
+      space_invaders.js 
+      space_invaders.wasm 
+```
+
+The server aliases "static" to the public directory, the database entry for Space Invaders would include a path such as `wasm/space_invaders/space_invaders.html` and the html file will be able to find `./space_invaders.js` and so on
+
+So far I have some games written in C or C++ and compiled with Emscripten for web, and one Three.js project also, there are an ever-increasing number of ways to target the web with high performance applications and I want to explore them. 

@@ -1,6 +1,6 @@
 opam-version: "2.0"
 synopsis: "FoldLeft.co.uk"
-description: "A portfolio website to show off my WebAssembly games"
+description: "A website to show off my toy projects"
 maintainer: ["lboyle@protonmail.com"]
 authors: ["lboyle@protonmail.com"]
 license: "MIT"
@@ -13,15 +13,14 @@ depends: [
   "melange" {>= "2.0.0"}
   "reason-react" {>= "0.13.0"}
   "reason-react-ppx"
-  "opam-check-npm-deps" {with-test} # todo: use with-dev-setup once opam 2.2 is out
-  "ocaml-lsp-server" {with-test} # todo: use with-dev-setup once opam 2.2 is out
-  "dot-merlin-reader" {with-test} # todo: use with-dev-setup once opam 2.2 is out
+  "opam-check-npm-deps" {with-test} 
+  "ocaml-lsp-server" {with-test} 
+  "dot-merlin-reader" {with-test} 
   "odoc" {with-doc}
   "ocamlformat"
   "dream" {>= "1.0.0~alpha5"}
-  "tyxml"
   "caqti-driver-sqlite3" {>= "1.9.0"}
   "melange-json"
   "melange-fetch"
 ]
-dev-repo: "git+https://github.com/your/project.git"
+# dev-repo: "git+https://github.com/your/project.git"

@@ -21,5 +21,7 @@ create table projects(
   name text,
   description text,
   demo_id int,
+  link text,
+  link_text text,
   foreign key (demo_id) references demo_apps(id)
 );

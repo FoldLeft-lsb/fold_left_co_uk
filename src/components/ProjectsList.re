@@ -42,42 +42,10 @@ let make = () => {
              </div>
            | Loaded(projects) =>
              Belt.List.mapWithIndex(projects, (i, project) => {
-               <Container
-                 size="2"
-                 p="8"
+               <ProjectsListItem
                  key={"project_" ++ string_of_int(i)}
-                 style={backgroundColor: "var(--gray-a2)"}>
-                 <Box maxWidth="20rem" height="20rem">
-                   <Text _as="p" size="6" weight="bold">
-                     {React.string(project.name)}
-                   </Text>
-                   <Text _as="p" size="4" weight="bold">
-                     {React.string(project._type)}
-                   </Text>
-                   <br />
-                   <Text _as="p" size="2" weight="bold">
-                     {React.string(project.description)}
-                   </Text>
-                   {switch (project.demo_id) {
-                    | None => React.null
-                    | Some(demo_id) =>
-                      let url = "/apps?id=" ++ string_of_int(demo_id);
-                      <>
-                        <br />
-                        <Link
-                          onClick={e => {
-                            React.Event.Mouse.preventDefault(e);
-                            ReasonReactRouter.push(url);
-                          }}
-                          href=url
-                          size="2"
-                          weight="bold">
-                          {React.string("Play the Demo")}
-                        </Link>
-                      </>;
-                    }}
-                 </Box>
-               </Container>
+                 project
+               />
              })
              ->Belt.List.toArray
              |> React.array
