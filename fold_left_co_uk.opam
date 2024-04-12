@@ -4,8 +4,8 @@ description: "A website to show off my toy projects"
 maintainer: ["lboyle@protonmail.com"]
 authors: ["lboyle@protonmail.com"]
 license: "MIT"
-homepage: "https://github.com/FoldLeft-lsb"
-bug-reports: "https://github.com/FoldLeft-lsb"
+homepage: "https://github.com/FoldLeft-lsb/fold_left_co_uk"
+bug-reports: "https://github.com/FoldLeft-lsb/fold_left_co_uk/issues"
 depends: [
   "ocaml"
   "reason" {>= "3.10.0"}
@@ -23,4 +23,4 @@ depends: [
   "melange-json"
   "melange-fetch"
 ]
-# dev-repo: "git+https://github.com/your/project.git"
+dev-repo: "git+https://github.com/FoldLeft-lsb/fold_left_co_uk.git"

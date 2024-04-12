@@ -28,11 +28,13 @@ insert into demo_apps (id, type, name, homepage, height, width, controls) values
   "First person controls with WASD and mouse, Left-click to interact, number keys to change selected block, F1 to save and F2 to load."
 );
 
-insert into projects (id, type, name, description) values (
+insert into projects (id, type, name, description, link, link_text) values (
   1,
   "ReasonML full-stack with radix-ui", 
   "This Website", 
-  "Made with the fanciest tech I could think of even if it's not useful. I'm not much of a designer so I tend toward 'less is more' and lean on a UI library. The API is a native OCaml executable with astounding performance, ReasonReact is a joy to use, it makes TypeScript feel like a half-measure."
+  "Made with the fanciest tech I could think of even if it's not useful. I'm not much of a designer so I tend toward 'less is more' and lean on a UI library. The API is a native OCaml executable with astounding performance, ReasonReact is a joy to use, it makes TypeScript feel like a half-measure.",
+  "https://github.com/FoldLeft-lsb/fold_left_co_uk",
+  "Github repo"
 );
 
 

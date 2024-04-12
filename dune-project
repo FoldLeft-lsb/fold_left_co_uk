@@ -10,9 +10,9 @@
 
 (authors lboyle@protonmail.com)
 
-(homepage https://github.com/FoldLeft-lsb)
+(homepage https://github.com/FoldLeft-lsb/fold_left_co_uk)
 
-(bug_reports https://github.com/FoldLeft-lsb)
+(bug_reports https://github.com/FoldLeft-lsb/fold_left_co_uk/issues)
 
 (package
  (allow_empty)
