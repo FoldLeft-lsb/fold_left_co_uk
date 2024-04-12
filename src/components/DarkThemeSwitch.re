@@ -11,10 +11,10 @@ let make = (~theme, ~setTheme) => {
     highContrast=true
     onCheckedChange={checked =>
       if (checked) {
-        set_saved_theme(Dark);
+        set_stored_theme(Dark);
         setTheme(_ => Dark);
       } else {
-        set_saved_theme(Light);
+        set_stored_theme(Light);
         setTheme(_ => Light);
       }
     }

@@ -31,6 +31,8 @@ module Project = {
           link_text,
         }: Common.Types.Project.t,
       );
+    // This is too much
+    // Caqti has Field.t so I should figure out how to use that
     let rep =
       Caqti_type.(
         tup2(

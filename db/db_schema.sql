@@ -7,9 +7,9 @@ create table dream_session (
 
 create table demo_apps(
   id text not null primary key,
-  type text,
-  name text,
-  homepage text,
+  type text not null,
+  name text not null,
+  homepage text not null,
   height text,
   width text,
   controls text
@@ -17,8 +17,8 @@ create table demo_apps(
 
 create table projects(
   id text not null primary key,
-  type text,
-  name text,
+  type text not null,
+  name text not null,
   description text,
   demo_id int,
   link text,

@@ -175,6 +175,7 @@ module Box = {
       // Responsive<"none" | "inline" | "inline-block" | "block">
       ~display: string=?,
       ~className: string=?,
+      ~p: string=?,
       ~pt: string=?,
       ~pb: string=?,
       ~maxWidth: string=?,

@@ -32,7 +32,7 @@ insert into projects (id, type, name, description) values (
   1,
   "ReasonML full-stack with radix-ui", 
   "This Website", 
-  "Made with the fanciest tech I could think of even if it's not useful. I'm not much of a designer so radix-ui takes care of that for me. The API is a native OCaml executable with astounding performance. ReasonReact is my weapon of choice, it's a joy to use, makes TypeScript feel like a half-measure."
+  "Made with the fanciest tech I could think of even if it's not useful. I'm not much of a designer so I tend toward 'less is more' and lean on a UI library. The API is a native OCaml executable with astounding performance, ReasonReact is a joy to use, it makes TypeScript feel like a half-measure."
 );
 
 
@@ -60,7 +60,7 @@ insert into projects (id, type, name, description, demo_id, link, link_text) val
   4,
   "Three.js WebGL Game", 
   "Blockgame ThreeJS", 
-  "I made this one following a tutorial to get a feel for Three.js and play around with procedural generation. It's relatively easy to get up and running, comes with useful addons and examples, and leaves opportunities for improvements and optimization. A good refresher writing JS without React also.",
+  "I made this one following a tutorial to get a feel for Three.js and play around with simple procedural generation. Three is relatively easy to get up and running, comes with useful addons and examples, and this project has opportunities for optimization.",
   3,
   "https://github.com/FoldLeft-lsb/blockgame_threejs",
   "Github repo"

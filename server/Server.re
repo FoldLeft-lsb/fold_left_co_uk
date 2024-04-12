@@ -1,10 +1,6 @@
 let default_route = Dream.from_filesystem("public", "index.html");
 
 let api_routes = [
-  // Dream.get("/apps", request => {
-  //   let%lwt db_apps = Dream.sql(request, Tables.Demo_App.list);
-  //   db_apps |> Encoders.Demo_App.encode_list |> Dream.json;
-  // }),
   Dream.get("/apps/:id", request => {
     switch (int_of_string(Dream.param(request, "id"))) {
     | exception _exn => request |> Dream.not_found

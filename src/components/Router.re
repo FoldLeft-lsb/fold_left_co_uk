@@ -32,7 +32,7 @@ let make = () => {
       }
     | _ => NotFound
     };
-  let (theme, setTheme) = React.useState(() => get_saved_theme());
+  let (theme, setTheme) = React.useState(() => get_stored_theme());
   switch (currentView) {
   | NotFound =>
     <Theme
@@ -45,54 +45,6 @@ let make = () => {
       <DarkThemeSwitch theme setTheme />
     </Theme>
   | Demo(id) => <ShowGame id theme setTheme />
-  | Landing =>
-    <>
-      <Theme
-        appearance={get_theme_name(theme)}
-        accentColor="mint"
-        grayColor="gray"
-        panelBackground="solid"
-        radius="medium">
-        <LandingPage />
-      </Theme>
-      <Theme
-        appearance={get_theme_name(theme)}
-        accentColor="mint"
-        grayColor="gray"
-        panelBackground="solid"
-        radius="medium">
-        <Box
-          _as="div"
-          className="GameGoblin-ui"
-          style={backgroundColor: "var(--gray-a2)"}>
-          <ProjectsList />
-        </Box>
-      </Theme>
-      <Theme
-        appearance={get_theme_name(theme)}
-        accentColor="mint"
-        grayColor="gray"
-        panelBackground="solid"
-        radius="medium">
-        <Technologies />
-        <Flex
-          _as="div"
-          display="flex"
-          justify="center"
-          direction="column"
-          className="">
-          <Container size="2" p="4" pb="9" pt="8">
-            <Text _as="p" size="7" weight="bold">
-              {React.string("Contact")}
-            </Text>
-            <br />
-            <a href="mailto:lboyle@protonmail.com">
-              {React.string("lboyle@protonmail.com")}
-            </a>
-          </Container>
-        </Flex>
-        <DarkThemeSwitch theme setTheme />
-      </Theme>
-    </>
+  | Landing => <> <LandingPage theme /> <ProjectsList theme setTheme /> </>
   };
 };

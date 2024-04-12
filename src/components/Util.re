@@ -33,13 +33,13 @@ let get_theme = n =>
 
 let local_storage_theme_key = "selected-theme-foldleft.co.uk";
 
-let get_saved_theme = () => {
+let get_stored_theme = () => {
   (localStorage->getItem(local_storage_theme_key) |> Js.Nullable.toOption)
   ->Belt.Option.map(theme => get_theme(theme))
   ->Belt.Option.getWithDefault(Dark);
 };
 
-let set_saved_theme = (theme: theme_t) => {
+let set_stored_theme = (theme: theme_t) => {
   localStorage->setItem(
     local_storage_theme_key,
     Js.Nullable.return(get_theme_name(theme)),

@@ -36,6 +36,8 @@ let make = (~id: int, ~theme: theme_t, ~setTheme) => {
            <p> {React.string(msg)} </p>
          </div>
        | Loaded(game) =>
+         // This is bad on mobile
+         // the games also aren't playable without a keyboard
          <>
            <IFrame
              src={"/static/" ++ game.homepage}

@@ -11,9 +11,7 @@ let make = (~project: Common.Types.Project.t) => {
         {React.string(project._type)}
       </Text>
       <br />
-      <Text _as="p" size="2" weight="bold">
-        {React.string(project.description)}
-      </Text>
+      <Text _as="p" size="2"> {React.string(project.description)} </Text>
       {switch (project.link) {
        | None => React.null
        | Some(link_url) =>

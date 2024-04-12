@@ -4,8 +4,6 @@ type timer_t;
 
 let clamp_int_to = (n, c): int => n < c ? c : n;
 
-// Idk if this is dumb but it is wicked!
-
 [@react.component]
 let make =
     (
