@@ -1,9 +1,3 @@
-type res_t('a) =
-  | NotStarted
-  | Loading
-  | Loaded('a)
-  | Failure(string);
-
 module Decode = {
   let item = (json: Js.Json.t): Common.Types.Project.t => {
     Json.Decode.{

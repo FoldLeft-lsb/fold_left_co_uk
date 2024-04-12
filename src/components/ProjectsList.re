@@ -3,11 +3,8 @@ open Util;
 
 [@react.component]
 let make = (~theme, ~setTheme) => {
-  let (
-    projects: Api.ProjectRest.res_t(list(Common.Types.Project.t)),
-    setProjects,
-  ) =
-    React.useState(() => Api.ProjectRest.NotStarted);
+  let (projects: server_res_t(list(Common.Types.Project.t)), setProjects) =
+    React.useState(() => NotStarted);
   React.useEffect0(() => {
     setProjects(_ => Loading);
     Api.ProjectRest.fetch_projects()
@@ -46,11 +43,7 @@ let make = (~theme, ~setTheme) => {
             {switch (projects) {
              | NotStarted
              | Loading => React.null
-             | Failure(msg) =>
-               <div>
-                 <p> {React.string("Error: ")} </p>
-                 <p> {React.string(msg)} </p>
-               </div>
+             | Failure(msg) => <ErrorMessage msg />
              | Loaded(projects) =>
                Belt.List.mapWithIndex(projects, (i, project) => {
                  <ProjectsListItem

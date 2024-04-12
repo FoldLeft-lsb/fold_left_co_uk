@@ -3,8 +3,8 @@ open Util;
 
 [@react.component]
 let make = (~id: int, ~theme: theme_t, ~setTheme) => {
-  let (game: Api.DemoAppRest.res_t(Common.Types.Demo_App.t), setGame) =
-    React.useState(() => Api.DemoAppRest.NotStarted);
+  let (game: server_res_t(Common.Types.Demo_App.t), setGame) =
+    React.useState(() => NotStarted);
   React.useEffect0(() => {
     setGame(_ => Loading);
     Api.DemoAppRest.fetch_app_by_id(~id)
@@ -30,11 +30,7 @@ let make = (~id: int, ~theme: theme_t, ~setTheme) => {
       {switch (game) {
        | NotStarted
        | Loading => React.null
-       | Failure(msg) =>
-         <div>
-           <p> {React.string("Error: ")} </p>
-           <p> {React.string(msg)} </p>
-         </div>
+       | Failure(msg) => <ErrorMessage msg />
        | Loaded(game) =>
          // This is bad on mobile
          // the games also aren't playable without a keyboard

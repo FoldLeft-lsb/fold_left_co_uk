@@ -6,6 +6,12 @@ external getItem: (storage_t, string) => Js.Nullable.t(string) = "getItem";
 external setItem: (storage_t, string, Js.Nullable.t(string)) => unit =
   "setItem";
 
+type server_res_t('response_body) =
+  | NotStarted
+  | Loading
+  | Loaded('response_body)
+  | Failure(string);
+
 type route_t =
   | Landing
   | Demo(int)
