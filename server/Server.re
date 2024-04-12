@@ -43,4 +43,4 @@ let () =
   |> Dream.sql_sessions
   |> Dream.sql_pool("sqlite3:db.sqlite")
   |> Dream.logger
-  |> Dream.run(~port=42069);
+  |> Dream.run(~port=4444);

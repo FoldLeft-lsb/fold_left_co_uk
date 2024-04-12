@@ -15,9 +15,8 @@ module Decode = {
   };
 };
 
-let fetch_apps = () => {
-  // Fetch.fetch("/api/apps")
-  Fetch.fetch("http://localhost:42069/api/apps")
+let _fetch_apps = () => {
+  Fetch.fetch("/api/apps")
   |> Js.Promise.then_(Fetch.Response.json)
   |> Js.Promise.then_(res => {
        switch (Decode.list(res)) {
@@ -34,8 +33,7 @@ let fetch_apps = () => {
 };
 
 let fetch_app_by_id = (~id: int) => {
-  // Fetch.fetch("/api/apps/" ++ string_of_int(id))
-  Fetch.fetch("http://localhost:42069/api/apps/" ++ string_of_int(id))
+  Fetch.fetch("/api/apps/" ++ string_of_int(id))
   |> Js.Promise.then_(Fetch.Response.json)
   |> Js.Promise.then_(res => {
        switch (Decode.item(res)) {
